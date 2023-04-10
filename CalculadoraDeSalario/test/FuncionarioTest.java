@@ -12,7 +12,8 @@ public class FuncionarioTest {
     private final double  SALARIO_MEDIO_GERENTE = 5000;
 
     private Funcionario funcionario;
-    @BeforeAll
+    private CalculadoraSalarioImpl calculadoraSalario = new CalculadoraSalarioImpl();
+    @BeforeEach
     public void setUp() {
         Funcionario funcionarioDev = new Funcionario("Lucas brasileiro", "lucas@gmail.com", SALARIO_MEDIO_DEV, DESENVOLVEDOR);
         Funcionario funcionarioDBA = new Funcionario("Holliver costa", "holliver@gmail.com", SALARIO_MEDIO_DBA, DBA);
