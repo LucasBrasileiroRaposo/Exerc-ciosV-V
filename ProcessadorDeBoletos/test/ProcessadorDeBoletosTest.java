@@ -10,23 +10,28 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProcessadorDeBoletosTest {
     private Fatura fatura, fatura2;
     private Boleto boleto, boleto2, boleto3;
-    private List<?> boletosValidos, boletosInsuficientes;
+    private List<Boleto> boletosValidos, boletosInsuficientes;
+    private ProcessadorDeBoletosImpl processadorDeBoletos;
 
     @BeforeEach
     public void setUp() {
-        boletosValidos, boletosInsuficientes = new ArrayList<?>();
+        boletosValidos = new ArrayList<Boleto>();
+        boletosInsuficientes = new ArrayList<Boleto>();
+        processadorDeBoletos = new ProcessadorDeBoletosImpl();
         boleto = new Boleto(1, new Date(), 100.0);
         boleto2 = new Boleto(2, new Date(), 400.0);
         boleto3 = new Boleto(3, new Date(), 1500.0);
-        boletosValidos.addAll(boleto,boleto2,boleto3);
+        boletosValidos.add(boleto);
+        boletosValidos.add(boleto2);
+        boletosValidos.add(boleto3);
         fatura = new Fatura(new Date(), 2000, "Holliver");
         boletosInsuficientes.add(boleto2);
-        boletosInsuficientes.add(boleto3);
+        boletosInsuficientes.add(boleto);
         fatura2 = new Fatura(new Date(), 1000, "Holliver");
     }
     @Test
     public void testProcessaFaturaPaga() {
-        ProcessadorBoletos.processa(boletosValidos, fatura2);
+        processadorDeBoletos.processa(boletosValidos, fatura);
 
         assertTrue(fatura.isPago());
         assertEquals(3, fatura.getPagamentos().size());
@@ -37,7 +42,7 @@ public class ProcessadorDeBoletosTest {
 
     @Test
     public void testProcessaFaturaNaoPaga() {
-        processadorDeBoletos.processa(boletosInsuficientes, fatura);
+        processadorDeBoletos.processa(boletosInsuficientes, fatura2);
 
         assertFalse(fatura.isPago());
         assertEquals(2, fatura.getPagamentos().size());
