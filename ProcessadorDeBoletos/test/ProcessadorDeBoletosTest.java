@@ -1,7 +1,7 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class ProcessadorDeBoletosTest {
     private Boleto boleto, boleto2, boleto3;
     private List<?> boletosValidos, boletosInsuficientes;
 
-    @BeforeAll
+    @BeforeEach
     public void setUp() {
         boletosValidos, boletosInsuficientes = new ArrayList<?>();
         boleto = new Boleto(1, new Date(), 100.0);
@@ -20,7 +20,8 @@ public class ProcessadorDeBoletosTest {
         boleto3 = new Boleto(3, new Date(), 1500.0);
         boletosValidos.addAll(boleto,boleto2,boleto3);
         fatura = new Fatura(new Date(), 2000, "Holliver");
-        boletosInsuficientes.addAll(boleto2,boleto);
+        boletosInsuficientes.add(boleto2);
+        boletosInsuficientes.add(boleto3);
         fatura2 = new Fatura(new Date(), 1000, "Holliver");
     }
     @Test
@@ -36,7 +37,7 @@ public class ProcessadorDeBoletosTest {
 
     @Test
     public void testProcessaFaturaNaoPaga() {
-        ProcessadorBoletos.processa(boletosInsuficientes, fatura);
+        processadorDeBoletos.processa(boletosInsuficientes, fatura);
 
         assertFalse(fatura.isPago());
         assertEquals(2, fatura.getPagamentos().size());
