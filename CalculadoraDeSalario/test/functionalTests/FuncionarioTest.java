@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +13,7 @@ public class FuncionarioTest {
 
     private Funcionario funcionario;
     private CalculadoraSalarioImpl calculadoraSalario = new CalculadoraSalarioImpl();
+
     @BeforeEach
     public void setUp() {
         funcionario = new Funcionario("Lucas brasileiro", "lucas@gmail.com", SALARIO_MEDIO_DEV, Cargo.DESENVOLVEDOR);
