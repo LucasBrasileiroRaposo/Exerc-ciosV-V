@@ -44,10 +44,10 @@ public class ProcessadorDeBoletosTest {
     public void testProcessaFaturaNaoPaga() {
         processadorDeBoletos.processa(boletosInsuficientes, fatura2);
 
-        assertFalse(fatura.isPago());
-        assertEquals(2, fatura.getPagamentos().size());
-        assertEquals(TipoPagamento.BOLETO, fatura.getPagamentos().get(0).getTipo());
-        assertEquals(TipoPagamento.BOLETO, fatura.getPagamentos().get(1).getTipo());
+        assertFalse(fatura2.isPago());
+        assertEquals(2, fatura2.getPagamentos().size());
+        assertEquals(TipoPagamento.BOLETO, fatura2.getPagamentos().get(0).getTipo());
+        assertEquals(TipoPagamento.BOLETO, fatura2.getPagamentos().get(1).getTipo());
     }
 
 
