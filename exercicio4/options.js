@@ -30,7 +30,7 @@ describe("options", () => {
     // Type in value input to search for specify option
     await driver
       .findElement(By.id("criteria_search_value"))
-      .sendKeys("jeans_size");
+      .sendKeys("t_shirt_size");
 
     // Click in filter blue button
     await driver
@@ -71,7 +71,7 @@ describe("options", () => {
     // Type the option code
     await driver
       .findElement(By.id("sylius_product_option_code"))
-      .sendKeys("teste_2");
+      .sendKeys("teste_1");
 
     // Type the option position
     await driver
@@ -81,7 +81,7 @@ describe("options", () => {
     // Type the option name in US language
     await driver
       .findElement(By.id("sylius_product_option_translations_en_US_name"))
-      .sendKeys("teste2");
+      .sendKeys("teste1");
 
     // Click on Save changes button
     await driver
@@ -153,8 +153,8 @@ describe("options", () => {
 
     // Find and click in the edit button of the last option of the table
     const tabela = await driver.findElements(By.tagName("tr"));
-    const ultimo_filho = tabela[tabela.length - 1];
-    const colunas = await ultimo_filho.findElements(By.tagName("td"));
+    const primeiro_filho = tabela[1];
+    const colunas = await primeiro_filho.findElements(By.tagName("td"));
     await colunas[colunas.length - 1].findElement(By.tagName("a")).click();
 
     // Find the input, clear the old value and type a new one
@@ -269,7 +269,7 @@ describe("options", () => {
     // Type the option name in US language
     await driver
       .findElement(By.id("sylius_product_option_translations_en_US_name"))
-      .sendKeys("test_option");
+      .sendKeys("test_option_size_s");
 
     // Click in add values button
     await driver.findElement(By.css('a[href="#"]')).click();
@@ -277,7 +277,7 @@ describe("options", () => {
     // Fill values for each language
     await driver
       .findElement(By.id("sylius_product_option_values_0_code"))
-      .sendKeys("test_size_s");
+      .sendKeys("test_option");
     await driver
       .findElement(
         By.id("sylius_product_option_values_0_translations_us_US_value")
@@ -425,6 +425,35 @@ describe("options", () => {
     await driver
       .findElement(By.css('[id="sylius_save_changes_button"]'))
       .click();
+  });
+  it("delete teste_option product", async () => {
+    // Click in options in side menu
+    await driver.findElement(By.linkText("Options")).click();
+
+    // Find and click in the check-box of the last option of the table
+    const tabela = await driver.findElements(By.tagName("tr"));
+    const ultimo_filho = tabela[tabela.length - 1];
+    const colunas = await ultimo_filho.findElements(By.tagName("td"));
+    await colunas[0].findElement(By.tagName("input")).click();
+
+    // Click in delete button above the table
+    await driver
+      .findElement(By.css('form[method="post"]'))
+      .findElement(By.tagName("button"))
+      .click();
+
+    // Click on confirmation button to delete an option
+    await driver.findElement(By.id("confirmation-button")).click();
+
+    // Assert that option has been deleted and sucess message is displayed
+    const bodyText = await driver
+      .findElement(
+        By.css('*[class^="ui icon positive message sylius-flash-message"]')
+      )
+      .getText();
+    assert(
+      bodyText.includes("Product_options have been successfully deleted.")
+    );
   });
   // Implement the remaining test cases in a similar manner
 });
