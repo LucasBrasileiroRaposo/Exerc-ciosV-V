@@ -182,6 +182,7 @@ describe('options', () => {
   });
 
   it(`create product options with values in each language`, async () => {
+
     // Click in options in side menu
     await driver.findElement(By.linkText('Options')).click();
 
@@ -195,7 +196,7 @@ describe('options', () => {
     await driver.findElement(By.id('sylius_product_option_position')).sendKeys(4);
     
     // Type the option name in US language
-    await driver.findElement(By.id('sylius_product_option_translations_en_US_name')).sendKeys('test_option');
+    await driver.findElement(By.id('sylius_product_option_translations_en_US_name')).sendKeys('test_option_size_s');
 
     // Click in add values button
     await driver.findElement(By.css('a[href="#"]')).click();
