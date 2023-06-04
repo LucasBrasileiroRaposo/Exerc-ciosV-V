@@ -55,7 +55,7 @@ describe('options', () => {
     // Click in options in side menu
     await driver.findElement(By.linkText('Options')).click();
 
-    // Type click on create option button
+    // Click on create option button
     await driver.findElement(By.css('*[class^="ui labeled icon button  primary "]')).click();
 
     // Type the option code
@@ -185,7 +185,7 @@ describe('options', () => {
     // Click in options in side menu
     await driver.findElement(By.linkText('Options')).click();
 
-    // Type click on create option button
+    // Click on create option button
     await driver.findElement(By.css('*[class^="ui labeled icon button  primary "]')).click();
 
     // Type the option code
